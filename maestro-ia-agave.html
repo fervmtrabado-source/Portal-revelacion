@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maestro IA Agave — Revelación</title>
+<title>Maestro IA gave — Revelación</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
@@ -22,12 +22,25 @@
   *{ margin:0; padding:0; box-sizing:border-box; }
   html, body{ height:100%; }
   body{
+    position:relative;
     background: linear-gradient(180deg, var(--teal-deep), #051f1d);
     color: var(--cream);
     font-family: 'Inter', sans-serif;
     display:flex;
     flex-direction:column;
   }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%236ff0e8' stroke-width='1'%3E%3Ccircle cx='130' cy='130' r='90' opacity='0.5'/%3E%3Ccircle cx='130' cy='130' r='65' opacity='0.35'/%3E%3Cpath d='M130 60 L130 130 M130 60 L110 95 M130 60 L150 95 M130 130 L95 150 M130 130 L165 150 M130 130 L100 190 M130 130 L160 190 M130 130 L130 205' stroke-width='1.4' opacity='0.8'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 260px 260px;
+  }
+  header, main, footer{ position:relative; z-index:1; }
   header{
     flex:0 0 auto;
     display:flex;
@@ -55,6 +68,13 @@
     font-style: italic;
     font-size: 1.15rem;
     color: var(--gold);
+  }
+  .ia-glow{
+    font-style: normal;
+    font-weight: 700;
+    color: #6ff0e8;
+    text-shadow: 0 0 8px rgba(111,240,232,0.9), 0 0 18px rgba(111,240,232,0.6), 0 0 30px rgba(111,240,232,0.35);
+    letter-spacing: 0.03em;
   }
   .brand span{
     display:block;
@@ -168,7 +188,7 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
     Volver al inicio
   </a>
-  <div class="brand">Maestro <span style="color:var(--gold-soft)">IA</span> Agave<span>REVELACIÓN</span></div>
+  <div class="brand">Maestro <span class="ia-glow">IA</span> gave<span>REVELACIÓN</span></div>
 </header>
 
 <main id="chat">
@@ -206,7 +226,7 @@
   function addTyping(){
     const div = document.createElement("div");
     div.className = "msg typing";
-    div.textContent = "Agavín está pensando...";
+    div.textContent = "Maestro IA gave está pensando...";
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
     return div;
@@ -253,7 +273,7 @@
     sendMessage(text);
   });
 
-  // Arranca la conversación automáticamente: Agavín saluda primero (sin mostrar un "Hola" falso del usuario)
+  // Arranca la conversación automáticamente: Maestro IA gave saluda primero (sin mostrar un "Hola" falso del usuario)
   window.addEventListener("DOMContentLoaded", function(){
     sendMessage("(el usuario acaba de abrir el chat, salúdalo y preséntate según tus instrucciones)", { silent: true });
   });
