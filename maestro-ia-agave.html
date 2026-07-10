@@ -35,10 +35,12 @@
     inset:0;
     z-index:0;
     pointer-events:none;
-    opacity: 0.16;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%236ff0e8' stroke-width='1'%3E%3Ccircle cx='130' cy='130' r='90' opacity='0.5'/%3E%3Ccircle cx='130' cy='130' r='65' opacity='0.35'/%3E%3Cpath d='M130 60 L130 130 M130 60 L110 95 M130 60 L150 95 M130 130 L95 150 M130 130 L165 150 M130 130 L100 190 M130 130 L160 190 M130 130 L130 205' stroke-width='1.4' opacity='0.8'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 260px 260px;
+    background-image:
+      linear-gradient(180deg, rgba(5,25,23,0.55) 0%, rgba(5,25,23,0.75) 55%, rgba(5,31,29,0.92) 100%),
+      url("./images/maestro_ia_agave_bg.jpg");
+    background-size: cover;
+    background-position: center 30%;
+    opacity: 0.55;
   }
   header, main, footer{ position:relative; z-index:1; }
   header{
