@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiencias de cata — Revelación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f6efe0;
+    --cream-card: #f2e4d2;
+    --teal-deep: #08302e;
+    --gold: #c9a24d;
+    --gold-soft: #ceac7c;
+    --gold-dark: #a5793c;
+    --text-dark: #22302c;
+    --text-muted: #6b5f4d;
+    --line: rgba(165,121,60,0.28);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--cream);
+    color: var(--text-dark);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  h1,h2,h3, .serif{ font-family: 'Cormorant Garamond', serif; font-weight: 500; }
+  .eyebrow{ font-family: 'Cinzel', serif; letter-spacing: 0.24em; text-transform: uppercase; font-size: 0.7rem; color: var(--gold-dark); }
+  a{ color:inherit; text-decoration:none; }
+
+  .bg-scene{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(180deg, rgba(246,239,224,0.93) 0%, rgba(246,239,224,0.96) 45%, rgba(246,239,224,0.98) 100%),
+      url("https://drive.google.com/thumbnail?id=1S09fMJFA24POH40NZ9KGTa6QxCIWIKUP&sz=w1920");
+    background-size: cover;
+    background-position: center top;
+  }
+
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 14px 5vw;
+  }
+
+  .brandmark{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+    background: rgba(246,239,224,0.68);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 16px;
+    box-shadow: 0 6px 18px rgba(30,25,15,0.1);
+  }
+  .brandmark .name{
+    font-family:'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight:600;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .brandmark .sub{
+    font-family:'Cinzel', serif;
+    font-size: 0.48rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .back{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform:uppercase;
+    color: var(--teal-deep);
+    background: rgba(246,239,224,0.68);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 18px;
+    transition: transform .2s ease;
+  }
+  .back:hover{ transform: translateX(-3px); }
+
+  main{
+    display:flex;
+    flex-direction:column;
+    gap: 34px;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 6vw 80px;
+  }
+
+  .video-frame{
+    position:relative;
+    border-radius: 16px;
+    overflow:hidden;
+    border: 1.5px solid rgba(255,224,160,0.75);
+    box-shadow: 0 0 0 2px rgba(255,224,160,0.25), 0 0 45px rgba(255,210,120,0.45), 0 14px 32px rgba(0,0,0,0.3);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .video-frame iframe{
+    width:100%; height:100%; border:0; display:block;
+  }
+
+  .col-text h1{
+    font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+    font-style: italic;
+    color: var(--teal-deep);
+    margin: 10px 0 20px;
+    line-height: 1.2;
+  }
+
+  .body-copy{ margin-bottom: 8px; max-width: 62ch; }
+  .body-copy p{
+    font-size: 0.98rem;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+  .body-copy p:first-of-type{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--teal-deep);
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .media-slot{
+    position:relative;
+    border-radius: 14px;
+    overflow:hidden;
+    border: 1.5px dashed var(--gold-dark);
+    background: rgba(242,228,210,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    padding: 18px;
+    aspect-ratio: 4/3;
+  }
+  .media-slot span{ max-width: 22ch; }
+  .media-slot.filled{
+    border-style: solid;
+    border-color: rgba(255,224,160,0.75);
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 0 2px rgba(255,224,160,0.25), 0 8px 24px rgba(0,0,0,0.25);
+  }
+  .media-slot.filled span{ display:none; }
+
+  .specs{
+    display:grid;
+    gap: 0;
+    margin-bottom: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .spec{
+    display:grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .spec .n{
+    font-family:'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--gold-dark);
+  }
+  .spec h3{
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--teal-deep);
+    margin-bottom: 3px;
+  }
+  .spec p{ font-size: 0.9rem; color: var(--text-muted); }
+
+  .promise{
+    background: var(--teal-deep);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 18px 20px;
+    font-size: 0.92rem;
+    margin-bottom: 8px;
+  }
+  .promise strong{ color: var(--gold-soft); }
+
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #1EBE5D, #128C4A);
+    color:#fff;
+    font-weight:700;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 18px rgba(18,140,74,0.35);
+    transition: transform .2s ease;
+    align-self: flex-start;
+  }
+  .cta:hover{ transform: translateY(-2px); }
+
+  @media (max-width: 860px){
+    main{ padding: 20px 5vw 60px; }
+    .brandmark .name{ font-size: 1.15rem; }
+    .back span{ display:none; }
+    .gallery{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-scene"></div>
+
+<header>
+  <div class="brandmark">
+    <span class="name">Revelación</span>
+    <span class="sub">EXPERIENCIA DE TEQUILA</span>
+  </div>
+  <a class="back" href="index.html">← <span>Portal</span></a>
+</header>
+
+<main>
+  <div class="video-frame">
+    <iframe src="https://drive.google.com/file/d/1udRBTjbkT6PekQJFlWW1jo1Qw3qbmL8i/preview" allow="autoplay" allowfullscreen></iframe>
+  </div>
+
+  <div class="col-text">
+    <div class="eyebrow">Experiencias de cata</div>
+    <h1>¿Qué buscamos en nuestras catas?</h1>
+
+    <div class="body-copy">
+      <p>En Revelación, una cata es mucho más que probar tequila. Buscamos acercarte a un recorrido de nuestra historia, entender el porqué de cada botella, descubrir el origen de su nombre, conocer su proceso de elaboración y aprender a identificar los aromas y sabores que hacen única a cada etiqueta.</p>
+      <p>Todo ello en un ambiente relajado, divertido y diferente, donde compartirás una experiencia fuera de lo común mientras conoces un poco más de México a través de una de sus expresiones culturales más representativas.</p>
+      <p>Porque cuando entiendes el tequila, no solo disfrutas una bebida... descubres una parte de nuestro país.</p>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="media-slot filled" style="background-image:url('https://drive.google.com/thumbnail?id=1gE4Trs1ouSsOM9w8p7HiGPMpdfr0iLaQ&sz=w800');"></div>
+    <div class="media-slot filled" style="background-image:url('https://drive.google.com/thumbnail?id=1hDSg6rpcvnbYDqWP1vCdqaUGOjrDwdCI&sz=w800');"></div>
+    <div class="media-slot filled" style="background-image:url('https://drive.google.com/thumbnail?id=1NfdVs1sMrm5NM4zuwd8C2ACnpj3yUGYm&sz=w800');"></div>
+  </div>
+
+  <div class="col-text">
+    <div class="specs">
+      <div class="spec">
+        <span class="n">01</span>
+        <div><h3>Duración</h3><p>90 a 120 minutos.</p></div>
+      </div>
+      <div class="spec">
+        <span class="n">02</span>
+        <div><h3>Formato</h3><p>Privado, corporativo o restaurante aliado.</p></div>
+      </div>
+      <div class="spec">
+        <span class="n">03</span>
+        <div><h3>Contenido</h3><p>Historia, proceso, lectura de etiquetas y degustación guiada.</p></div>
+      </div>
+      <div class="spec">
+        <span class="n">04</span>
+        <div><h3>Cierre</h3><p>Recomendación de botellas y siguiente experiencia.</p></div>
+      </div>
+    </div>
+
+    <div class="promise">
+      <strong>Promesa:</strong> el cliente entiende qué toma, por qué cuesta lo que cuesta
+      y cómo elegir — sin marketing vacío.
+    </div>
+
+    <a class="cta" href="https://wa.me/525527708659" target="_blank" rel="noopener">Reservar una cata</a>
+  </div>
+</main>
+
+</body>
+</html>

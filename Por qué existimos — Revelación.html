@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Por qué existimos — Revelación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f6efe0;
+    --cream-card: #f2e4d2;
+    --teal-deep: #08302e;
+    --gold: #c9a24d;
+    --gold-soft: #ceac7c;
+    --gold-dark: #a5793c;
+    --text-dark: #22302c;
+    --text-muted: #6b5f4d;
+    --line: rgba(165,121,60,0.28);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--cream);
+    color: var(--text-dark);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  h1,h2,h3, .serif{ font-family: 'Cormorant Garamond', serif; font-weight: 500; }
+  .eyebrow{ font-family: 'Cinzel', serif; letter-spacing: 0.24em; text-transform: uppercase; font-size: 0.7rem; color: var(--gold-dark); }
+  a{ color:inherit; text-decoration:none; }
+
+  .bg-scene{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(180deg, rgba(246,239,224,0.93) 0%, rgba(246,239,224,0.96) 45%, rgba(246,239,224,0.98) 100%),
+      url("https://drive.google.com/thumbnail?id=1S09fMJFA24POH40NZ9KGTa6QxCIWIKUP&sz=w1920");
+    background-size: cover;
+    background-position: center top;
+  }
+
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 14px 5vw;
+  }
+
+  .brandmark{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+    background: rgba(246,239,224,0.68);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 16px;
+    box-shadow: 0 6px 18px rgba(30,25,15,0.1);
+  }
+  .brandmark .name{
+    font-family:'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight:600;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .brandmark .sub{
+    font-family:'Cinzel', serif;
+    font-size: 0.48rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .back{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform:uppercase;
+    color: var(--teal-deep);
+    background: rgba(246,239,224,0.68);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 18px;
+    transition: transform .2s ease;
+  }
+  .back:hover{ transform: translateX(-3px); }
+
+  main{
+    display:flex;
+    flex-direction:column;
+    gap: 34px;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 30px 6vw 80px;
+  }
+
+  .col-text h1{
+    font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+    font-style: italic;
+    color: var(--teal-deep);
+    margin: 10px 0 20px;
+    line-height: 1.2;
+  }
+  .col-text h1 em{ color: var(--gold-dark); font-style: italic; }
+
+  .col-text p.lead{
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    max-width: 46ch;
+    margin-bottom: 26px;
+  }
+
+  .body-copy{ margin-bottom: 28px; max-width: 58ch; }
+  .body-copy p{
+    font-size: 0.98rem;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+  .body-copy p:first-of-type{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--teal-deep);
+  }
+
+  .video-frame{
+    position:relative;
+    border-radius: 16px;
+    overflow:hidden;
+    border: 1.5px solid rgba(255,224,160,0.75);
+    box-shadow: 0 0 0 2px rgba(255,224,160,0.25), 0 0 45px rgba(255,210,120,0.45), 0 14px 32px rgba(0,0,0,0.3);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .video-frame iframe{
+    width:100%; height:100%; border:0; display:block;
+  }
+  .video-caption{
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align:center;
+    margin-top: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 860px){
+    main{ padding: 20px 5vw 60px; }
+    .brandmark .name{ font-size: 1.15rem; }
+    .back span{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-scene"></div>
+
+<header>
+  <div class="brandmark">
+    <span class="name">Revelación</span>
+    <span class="sub">EXPERIENCIA DE TEQUILA</span>
+  </div>
+  <a class="back" href="index.html">← <span>Portal</span></a>
+</header>
+
+<main>
+  <div class="col-media">
+    <div class="video-frame">
+      <iframe src="https://drive.google.com/file/d/1HuIP86KqG_C3mQuvKcdd-Bdv371agGlA/preview" allow="autoplay" allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">Revelación — Experiencia de Tequila</p>
+  </div>
+
+  <div class="col-text">
+    <div class="eyebrow">Por qué existimos</div>
+    <h1>¿Por qué existe <em>Revelación</em>?</h1>
+
+    <div class="body-copy">
+      <p>Revelación nace de la pasión por compartir la riqueza cultural que existe detrás del buen tequila.</p>
+      <p>Creemos que cada botella es mucho más que un destilado: es el resultado de una historia, una tierra, un proceso y generaciones de conocimiento que han acompañado a México durante siglos.</p>
+      <p>Los destilados de agave han estado presentes en nuestras celebraciones, tradiciones y momentos más significativos, formando parte de la identidad de nuestro país.</p>
+      <p>Por eso existimos: para acercar a más personas a esa cultura, ayudarlas a descubrir, comprender y disfrutar el tequila con una mirada diferente, promoviendo el respeto por su origen, sus procesos, sus aromas y la extraordinaria diversidad que hace única a cada etiqueta.</p>
+      <p>En cada experiencia de cata no solo compartimos nuestra cava; compartimos historias, conocimiento y el profundo significado cultural que cada tequila lleva consigo. Nuestra selección no busca las etiquetas comerciales de siempre, sino tequilas con identidad, carácter y autenticidad, elaborados por productores que honran la tradición y expresan el verdadero espíritu de su tierra.</p>
+      <p>Porque creemos que una gran botella se disfruta mucho más cuando también se entiende la extraordinaria diversidad que existe entre cada etiqueta.</p>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

@@ -62,7 +62,7 @@
     z-index: -1;
     background-image:
       linear-gradient(180deg, rgba(10,20,25,0.05) 0%, rgba(10,20,25,0.02) 35%, rgba(246,239,224,0.22) 80%, rgba(246,239,224,0.42) 100%),
-      url("./images/fondo.jpg");
+      url("https://drive.google.com/thumbnail?id=1S09fMJFA24POH40NZ9KGTa6QxCIWIKUP&sz=w1920");
     background-size: cover;
     background-position: center top;
   }
@@ -261,13 +261,55 @@
 
   /* footer removido a petición del cliente, para dar más protagonismo al fondo */
 
+  /* ==========================================================
+     MOBILE
+     La versión de escritorio está pensada para caber sin scroll
+     en una sola pantalla. En mobile el mismo layout (2 columnas,
+     posiciones absolutas, overflow:hidden) no cabe, así que aquí
+     lo convertimos en un layout normal que fluye de arriba a abajo
+     y permite scroll.
+     ========================================================== */
   @media (max-width: 760px){
-    .tagline-wrap{ left: 5vw; right: 5vw; max-width: none; top: 5%; }
-    .card-copy{ padding: 8px 10px; }
-    .card{ min-height: 90px; }
-    .card h3{ font-size: 0.82rem; }
-    .card p{ display:none; }
+    html, body{ height:auto; }
+    body{
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    header{ padding: 12px 4vw; }
+    .brandmark{ padding: 8px 12px; }
+    .brandmark .name{ font-size: 1.2rem; }
+    .brandmark .sub{ font-size: 0.42rem; }
+    .btn-wsp{ padding: 10px; }
     .btn-wsp span{ display:none; }
+
+    .hero{
+      flex: 0 0 auto;
+      min-height: 32vh;
+    }
+    .tagline-wrap{
+      position: relative;
+      left: auto; right: auto; top: auto;
+      max-width: none;
+      margin: 18px 5vw 6px;
+      padding: 16px 18px;
+    }
+
+    .grid{
+      left: 50%;
+      transform: translateX(-50%);
+      grid-template-columns: 1fr;
+      row-gap: 14px;
+      column-gap: 0;
+      width: 90vw;
+      max-width: 440px;
+      padding: 4px 0 36px;
+    }
+    .card-copy{ padding: 10px 12px; }
+    .card{ min-height: 110px; }
+    .card h3{ font-size: 0.95rem; }
+    .card p{ display:none; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -284,7 +326,7 @@
     <span class="name">Revelación</span>
     <span class="sub">EXPERIENCIA DE TEQUILA</span>
   </div>
-  <a class="btn-wsp" href="https://wa.me/525554346689" target="_blank" rel="noopener">
+  <a class="btn-wsp" href="https://wa.me/525527708659" target="_blank" rel="noopener">
     <span class="wsp-icon">
       <svg viewBox="0 0 24 24" fill="#128C4A"><path d="M20.5 3.5A11 11 0 003.3 17L2 22l5.2-1.3A11 11 0 1020.5 3.5zM12 20a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1s-.6.8-.7.9-.3.2-.5.1a6.6 6.6 0 01-2-1.2 7.3 7.3 0 01-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4a.5.5 0 000-.5c-.1-.1-.5-1.2-.7-1.7s-.4-.4-.5-.4h-.5a.9.9 0 00-.6.3 2.8 2.8 0 00-.9 2 4.9 4.9 0 001 2.6 11.2 11.2 0 004.3 3.8c.6.2 1 .4 1.4.5a3.4 3.4 0 001.5.1 2.5 2.5 0 001.6-1.2 2 2 0 00.1-1.2c0-.1-.2-.2-.4-.3z"/></svg>
     </span>
@@ -300,28 +342,28 @@
 
 <div class="grid">
 
-  <a class="card light" href="https://drive.google.com/file/d/1HuIP86KqG_C3mQuvKcdd-Bdv371agGlA/view?usp=sharing" target="_blank" rel="noopener" style="background-image:url('./images/porque_existimos.jpg'); background-position:center; background-size:contain; background-repeat:no-repeat;">
+  <a class="card light" href="por-que-existimos.html" style="background-image:url('https://drive.google.com/thumbnail?id=1JbbMCSc-8WPUApukAMBdh_RQfnFhKi6f&sz=w800'); background-position:center; background-size:contain; background-repeat:no-repeat;">
     <div class="card-copy">
       <h3>Por qué existimos</h3>
       <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </div>
   </a>
 
-  <a class="card dark" href="./maestro-ia-agave.html" style="background-image:url('./images/maestro_ia_agave.jpg'); background-position:center 55%;">
+  <a class="card dark" href="#agavin" style="background-image:url('https://drive.google.com/thumbnail?id=1c20aJe9mT13ib0bi4l0OBHZMLpJf9lig&sz=w800'); background-position:center 55%;">
     <div class="card-copy">
       <h3>Maestro <span class="accent">IA</span> gave</h3>
       <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </div>
   </a>
 
-  <a class="card dark" href="https://cavarevelacion.netlify.app/" target="_blank" rel="noopener" style="background-image:url('./images/nuestra_cava.jpg'); background-position:center 35%;">
+  <a class="card dark" href="https://cavarevelacion.netlify.app/" target="_blank" rel="noopener" style="background-image:url('https://drive.google.com/thumbnail?id=11kYZ48zObWhrC42HgZ8d352EY3kiRsE6&sz=w800'); background-position:center 35%;">
     <div class="card-copy">
       <h3>La Cava</h3>
       <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </div>
   </a>
 
-  <a class="card light" href="#experiencias" style="background-image:url('./images/experiencia_de_cata.jpg'); background-position:center 40%;">
+  <a class="card light" href="experiencias-cata.html" style="background-image:url('https://drive.google.com/thumbnail?id=1BnHCuO0a4j5YUr9ylDhJn5CjCf4lscs4&sz=w800'); background-position:center 40%;">
     <div class="card-copy">
       <h3>Experiencias de cata</h3>
       <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
