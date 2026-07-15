@@ -162,6 +162,13 @@
     main{ padding: 20px 5vw 60px; }
     .brandmark .name{ font-size: 1.15rem; }
     .back span{ display:none; }
+
+    /* En celular, el reproductor de Google Drive reserva una barra de
+       herramientas de alto fijo (no se puede quitar). En una caja 16:9
+       angosta esa barra se come proporcionalmente más espacio y el video
+       se ve "cortado a la mitad". Con una caja más alta (4:3) el video
+       real ocupa más superficie visible. */
+    .video-frame{ aspect-ratio: 4 / 3; }
   }
 </style>
 </head>
