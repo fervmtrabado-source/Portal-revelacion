@@ -298,14 +298,14 @@
 
     .hero{
       flex: 0 0 auto;
-      height: 44vh;
-      min-height: 280px;
+      height: 37vh;
+      min-height: 230px;
       position: relative;
       background-image:
         linear-gradient(180deg, rgba(8,20,18,0.2) 0%, rgba(8,20,18,0.02) 45%, rgba(246,239,224,0) 75%),
         url(./images/fondo.jpg);
       background-size: cover;
-      background-position: center 35%;
+      background-position: center 18%;
     }
     .tagline-wrap{ display:none; }
 
@@ -386,10 +386,13 @@
       padding: 12px 14px;
     }
     .exp-icon{
-      width: 48px; height:48px;
+      width: 52px; height:52px;
       flex-shrink:0;
       border-radius: 12px;
       background: var(--teal-deep);
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(255,224,160,0.5);
       display:flex; align-items:center; justify-content:center;
       color: var(--gold-soft);
     }
@@ -513,13 +516,7 @@
   <div class="explora-heading">Explora Revelación</div>
 
   <a class="exp-row" href="por-que-existimos.html">
-    <span class="exp-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-        <path d="M12 21V10"/><path d="M12 10L6 3"/><path d="M12 10L18 3"/>
-        <path d="M12 13L4 8"/><path d="M12 13L20 8"/>
-        <path d="M12 16L2 13"/><path d="M12 16L22 13"/>
-      </svg>
-    </span>
+    <span class="exp-icon" style="background-image:url(./images/porque_existimos.jpg); background-position:center 30%;"></span>
     <span class="exp-text">
       <span class="exp-title">Por qué existimos</span>
       <span class="exp-desc">Nuestra misión y lo que nos inspira</span>
@@ -528,13 +525,7 @@
   </a>
 
   <a class="exp-row" href="maestro-ia-agave.html">
-    <span class="exp-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="12" cy="12" r="8"/>
-        <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/>
-        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M5 19l2-2"/>
-      </svg>
-    </span>
+    <span class="exp-icon" style="background-image:url(./images/maestro_ia_agave.jpg); background-position:center 55%;"></span>
     <span class="exp-text">
       <span class="exp-title">Maestro IA gave</span>
       <span class="exp-desc">Descubre, aprende y encuentra tequilas a tu medida</span>
@@ -543,12 +534,7 @@
   </a>
 
   <a class="exp-row" href="https://cavarevelacion.netlify.app/" target="_blank" rel="noopener">
-    <span class="exp-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 2h6M10 2v4.5c0 .8-.3 1.6-.9 2.2C8.4 9.4 8 10.6 8 11.8V20a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-8.2c0-1.2-.4-2.4-1.1-3.1-.6-.6-.9-1.4-.9-2.2V2"/>
-        <path d="M8 14h8"/>
-      </svg>
-    </span>
+    <span class="exp-icon" style="background-image:url(./images/nuestra_cava.jpg); background-position:center 35%;"></span>
     <span class="exp-text">
       <span class="exp-title">La Cava</span>
       <span class="exp-desc">Explora nuestra selección de tequilas y mezcales</span>
@@ -557,16 +543,7 @@
   </a>
 
   <a class="exp-row" href="experiencias-cata.html">
-    <span class="exp-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 3h5l-.8 5.5a1.8 1.8 0 0 1-1.8 1.5 1.8 1.8 0 0 1-1.8-1.5L4 3z"/>
-        <path d="M6.5 10v8M4.5 18h4"/>
-        <g transform="rotate(20 17 8)">
-          <path d="M14.5 3h5l-.8 5.5a1.8 1.8 0 0 1-1.8 1.5 1.8 1.8 0 0 1-1.8-1.5L14.5 3z"/>
-          <path d="M17 10v8M15 18h4"/>
-        </g>
-      </svg>
-    </span>
+    <span class="exp-icon" style="background-image:url(./images/experiencia_de_cata.jpg); background-position:center 40%;"></span>
     <span class="exp-text">
       <span class="exp-title">Catas y experiencias</span>
       <span class="exp-desc">Vive el tequila desde el origen</span>
