@@ -284,32 +284,25 @@
        solo en el bloque .hero, con altura fija */
     .bg-scene{ display:none; }
 
-    header{
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      z-index: 60;
-      padding: 14px 4vw;
-    }
-    .brandmark{ padding: 8px 12px; }
-    .brandmark .name{ font-size: 1.2rem; }
-    .brandmark .sub{ font-size: 0.42rem; }
-    .btn-wsp{ padding: 10px; }
-    .btn-wsp span{ display:none; }
+    /* El header (rectángulo "Revelación" + botón WhatsApp) se quita en
+       mobile: interfiere con el logo que ya viene dibujado en la foto,
+       y el WhatsApp ya aparece abajo en la fila "Reservar una cata". */
+    header{ display:none; }
 
     .hero{
       flex: 0 0 auto;
-      height: 37vh;
-      min-height: 230px;
+      height: 34vh;
+      min-height: 220px;
       position: relative;
       background-image:
-        linear-gradient(180deg, rgba(8,20,18,0.2) 0%, rgba(8,20,18,0.02) 45%, rgba(246,239,224,0) 75%),
+        linear-gradient(180deg, rgba(8,20,18,0.14) 0%, rgba(8,20,18,0.02) 45%, rgba(246,239,224,0) 75%),
         url(./images/fondo.jpg);
       background-size: cover;
-      background-position: center 18%;
+      background-position: center 30%;
     }
     .tagline-wrap{ display:none; }
 
-    /* texto + CTA debajo de la foto, sobre fondo crema sólido */
+    /* texto debajo de la foto, sobre fondo crema sólido (sin botón CTA) */
     .hero-copy-m{
       display:block;
       padding: 26px 7vw 4px;
@@ -330,22 +323,7 @@
       margin-top: 12px;
       max-width: 34ch;
     }
-    .btn-cta-m{
-      display:inline-flex;
-      align-items:center;
-      gap:9px;
-      margin-top: 18px;
-      padding: 13px 20px;
-      border-radius: 10px;
-      background: var(--teal-deep);
-      color: var(--gold);
-      border: 1px solid rgba(201,162,77,0.5);
-      font-family:'Cinzel', serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .btn-cta-m svg{ width:14px; height:14px; stroke:var(--gold); }
+    .btn-cta-m{ display:none; }
 
     /* cards de fotos recortadas: fuera en mobile, entra la lista */
     .grid{ display:none; }
