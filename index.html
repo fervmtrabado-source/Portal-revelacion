@@ -258,8 +258,8 @@
 
   /* ==========================================================
      NUEVO: markup exclusivo de mobile (oculto en desktop).
-     hero-copy-m = tagline + subtítulo + botón CTA, debajo de la foto.
-     explore-list = lista "Explora Revelación" con iconos.
+     hero-copy-m = tagline + subtítulo, debajo de la foto.
+     explore-list = lista "Explora Revelación" con iconos-foto.
      ========================================================== */
   .hero-copy-m{ display:none; }
   .explore-list{ display:none; }
@@ -269,8 +269,8 @@
   /* ==========================================================
      MOBILE
      Rediseño: foto fija arriba (no fondo fijo de toda la página),
-     texto + botón CTA debajo, y lista "Explora Revelación" con
-     iconos en vez de fotos recortadas.
+     texto debajo, y lista "Explora Revelación" con fotos reales
+     en vez de fotos recortadas en cards grandes.
      ========================================================== */
   @media (max-width: 760px){
     html, body{ height:auto; }
@@ -386,16 +386,16 @@
       text-transform: uppercase;
       letter-spacing: 0.01em;
     }
+    .exp-ia-glow{
+      color: var(--teal-deep);
+      font-style: normal;
+      text-shadow: 0 0 5px rgba(111,240,232,0.95), 0 0 10px rgba(111,240,232,0.7), 0 0 18px rgba(111,240,232,0.4);
+    }
     .exp-desc{
       display:block;
       font-size: 0.78rem;
       color: var(--text-muted);
       margin-top: 2px;
-    }
-    .exp-ia-glow{
-      color: #6ff0e8;
-      font-style: normal;
-      text-shadow: 0 0 6px rgba(111,240,232,0.85), 0 0 14px rgba(111,240,232,0.5);
     }
     .exp-arrow{
       width: 30px; height:30px;
@@ -453,7 +453,7 @@
   </div>
 </section>
 
-<!-- Texto + botón CTA: solo visible en mobile, va debajo de la foto -->
+<!-- Texto: solo visible en mobile, va debajo de la foto -->
 <div class="hero-copy-m">
   <p class="tagline-m">Quizá tu tequila favorito, <em>aún no se ha revelado.</em></p>
   <p class="hero-sub-m">Historias auténticas, etiquetas excepcionales y experiencias que celebran lo mejor de México.</p>
