@@ -301,6 +301,43 @@ Notas: Agave fresco, miel, aceituna verde, pimienta blanca y notas vegetales sut
 Precio: $1,680
 `;
 
+// ---------------------------------------------------------------------------
+// CONFIGURACION DE COSTO
+// ---------------------------------------------------------------------------
+// Modelo. Se puede cambiar SIN tocar el codigo creando la variable de entorno
+// ANTHROPIC_MODEL en Netlify (Site settings > Environment variables).
+const MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-4-5";
+
+// Cuantos mensajes de historial se mandan como maximo (pares usuario/asistente).
+// Menos historial = menos tokens = menos costo por mensaje.
+const MAX_HISTORIAL = 12;
+
+// Largo maximo de la respuesta. El prompt pide 2-4 oraciones, 500 sobra.
+const MAX_TOKENS = 500;
+
+// ---------------------------------------------------------------------------
+// MANEJO DE ERRORES: el usuario NUNCA ve el error tecnico.
+// Siempre devolvemos 200 con un mensaje en personaje para que el front lo
+// pinte como una respuesta normal del Maestro y no como una falla.
+// ---------------------------------------------------------------------------
+const MENSAJES_FALLA = [
+  "Ando sirviendo otra copa en este momento. Dame unos segundos y vuelve a escribirme, por favor.",
+  "Se me trabo la lengua tantito. Mandame de nuevo tu pregunta y seguimos platicando.",
+  "Perdon, ando atendiendo la barra. Intenta otra vez en un momentito y con gusto te ayudo.",
+];
+
+function respuestaAmable(motivoInterno) {
+  if (motivoInterno) console.error("[maestro-agave]", motivoInterno);
+  const texto = MENSAJES_FALLA[Math.floor(Math.random() * MENSAJES_FALLA.length)];
+  return {
+    statusCode: 200,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      reply: texto + " Si te urge, escribenos directo por WhatsApp al 55 2770 8659.",
+    }),
+  };
+}
+
 exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Metodo no permitido" }) };
@@ -308,22 +345,31 @@ exports.handler = async function (event) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Falta configurar ANTHROPIC_API_KEY en Netlify (Site settings > Environment variables)." }),
-    };
+    return respuestaAmable("Falta ANTHROPIC_API_KEY en las variables de entorno de Netlify.");
   }
 
   let payload;
   try {
     payload = JSON.parse(event.body || "{}");
   } catch (e) {
-    return { statusCode: 400, body: JSON.stringify({ error: "JSON invalido" }) };
+    return respuestaAmable("JSON invalido en el body: " + e.message);
   }
 
-  const messages = Array.isArray(payload.messages) ? payload.messages : [];
+  let messages = Array.isArray(payload.messages) ? payload.messages : [];
   if (messages.length === 0) {
-    return { statusCode: 400, body: JSON.stringify({ error: "Falta el arreglo messages" }) };
+    return respuestaAmable("Llego una peticion sin el arreglo messages.");
+  }
+
+  // Recortamos el historial para no pagar tokens de mas en conversaciones largas.
+  if (messages.length > MAX_HISTORIAL) {
+    messages = messages.slice(-MAX_HISTORIAL);
+    // La API exige que el primer mensaje sea del usuario.
+    while (messages.length && messages[0].role !== "user") {
+      messages.shift();
+    }
+    if (messages.length === 0) {
+      return respuestaAmable("El historial quedo vacio despues del recorte.");
+    }
   }
 
   try {
@@ -335,9 +381,18 @@ exports.handler = async function (event) {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-5",
-        max_tokens: 800,
-        system: SYSTEM_PROMPT,
+        model: MODEL,
+        max_tokens: MAX_TOKENS,
+        // El system prompt va marcado con cache_control: se cobra completo solo
+        // la primera vez y despues casi gratis mientras la conversacion siga viva.
+        // Esto es lo que mas ahorra, porque el prompt es largo.
+        system: [
+          {
+            type: "text",
+            text: SYSTEM_PROMPT,
+            cache_control: { type: "ephemeral" },
+          },
+        ],
         messages: messages,
       }),
     });
@@ -345,16 +400,20 @@ exports.handler = async function (event) {
     const data = await response.json();
 
     if (!response.ok) {
-      return {
-        statusCode: response.status,
-        body: JSON.stringify({ error: (data.error && data.error.message) || "Error al llamar a la API de Anthropic" }),
-      };
+      return respuestaAmable(
+        "Error " + response.status + " de la API: " +
+        ((data && data.error && data.error.message) || "sin detalle")
+      );
     }
 
     const textBlocks = (data.content || [])
-      .filter(function(b){ return b.type === "text"; })
-      .map(function(b){ return b.text; })
+      .filter(function (b) { return b.type === "text"; })
+      .map(function (b) { return b.text; })
       .join("\n");
+
+    if (!textBlocks.trim()) {
+      return respuestaAmable("La API respondio sin bloques de texto.");
+    }
 
     return {
       statusCode: 200,
@@ -362,9 +421,6 @@ exports.handler = async function (event) {
       body: JSON.stringify({ reply: textBlocks }),
     };
   } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Error de conexion con Anthropic: " + err.message }),
-    };
+    return respuestaAmable("Error de conexion con Anthropic: " + err.message);
   }
 };
