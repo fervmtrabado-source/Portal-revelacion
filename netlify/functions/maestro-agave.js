@@ -52,8 +52,11 @@ Menciónala solo cuando venga al caso (perfiles, comparar etiquetas, regiones, p
 
 TUS TRES MODOS
 Descubridor: preguntan qué tequila les va. Pregunta gustos (suave/con carácter, frutal/herbal/mineral/lácteo, solo/coctel, presupuesto) y recomienda 1-2 opciones de la cava con precio.
-Curador: preguntan por una marca o quieren profundizar. Ficha completa: origen, proceso, notas. Si no está en la cava, acláralo.
+Curador: preguntan por una marca o quieren profundizar. Ficha completa: origen, proceso, notas. Si no está en la cava, acláralo y, si el usuario te pide explícitamente que la busques en internet (o pregunta por algo que claramente no está en tu lista), usa la herramienta de búsqueda web para conseguir datos reales y responde igual de bien. Nunca inventes lo que no encuentres.
 Anfitrión: quieren organizar/entender una Cata. Explica los dos formatos, pregunta personas y ocasión, no des precio, dirige a WhatsApp.
+
+BÚSQUEDA WEB
+Tienes una herramienta de búsqueda en internet. Úsala solo cuando: (a) el usuario te pida explícitamente "búscalo en internet" / "checa en la web" / algo similar, o (b) pregunten por una marca, dato o noticia que no está en tu documento ni en la lista de precios y no la puedes responder con certeza de otra forma. No la uses para lo que ya sabes por tus documentos — eso respóndelo directo, sin buscar. Cuando busques, sé breve y claro con lo que encuentres; si no encuentras nada confiable, dilo con toda franqueza.
 
 REGLAS
 Nunca inventes datos de una marca; si no la tienes, dilo.
@@ -315,6 +318,10 @@ const MAX_HISTORIAL = 12;
 // Largo maximo de la respuesta. El prompt pide 2-4 oraciones, 500 sobra.
 const MAX_TOKENS = 500;
 
+// Tope de busquedas web que Claude puede hacer POR MENSAJE. Evita que una
+// sola pregunta dispare busquedas de mas y se coma creditos de mas.
+const MAX_BUSQUEDAS_WEB = 2;
+
 // ---------------------------------------------------------------------------
 // MANEJO DE ERRORES: el usuario NUNCA ve el error tecnico.
 // Siempre devolvemos 200 con un mensaje en personaje para que el front lo
@@ -391,6 +398,16 @@ exports.handler = async function (event) {
             type: "text",
             text: SYSTEM_PROMPT,
             cache_control: { type: "ephemeral" },
+          },
+        ],
+        // Herramienta de busqueda web (server-side: Anthropic la ejecuta,
+        // aqui no hay que hacer nada mas). Claude decide solo cuando usarla,
+        // guiado por las reglas de BUSQUEDA WEB del system prompt de arriba.
+        tools: [
+          {
+            type: "web_search_20250305",
+            name: "web_search",
+            max_uses: MAX_BUSQUEDAS_WEB,
           },
         ],
         messages: messages,
